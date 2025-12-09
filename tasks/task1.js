@@ -20,3 +20,20 @@ const products = [
 
 console.log(getPopularCategories(products)); // ['Electronics', 'Clothing', 'Footwear']
 module.exports = getPopularCategories;
+function getPopularCategories(products) {
+  // 1. Фільтруємо товари, які продані більше 5 разів
+  const filtered = products.filter(item => item.sales > 5);
+
+  // 2. Сортуємо за кількістю продажів (спадання)
+  const sorted = filtered.sort((a, b) => b.sales - a.sales);
+
+  // 3. Беремо тільки категорії
+  const categories = sorted.map(item => item.category);
+
+  // 4. Робимо унікальний список категорій
+  const uniqueCategories = [...new Set(categories)];
+
+  return uniqueCategories;
+}
+
+module.exports = getPopularCategories;
